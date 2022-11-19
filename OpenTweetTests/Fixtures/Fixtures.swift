@@ -23,6 +23,11 @@ enum Fixture: String {
 
 extension URL {
 
+    /// Create a URL which points to the location of a ``Fixture``
+    /// - Parameters:
+    ///   - fixture: The ``Fixture`` the URL should point to
+    ///   - bundle: The `Bundle` in which the ``Fixture`` is located
+    ///   - Note: This method is only intended for testing so will throw an error if the ``Fixture`` cannot be found as this is deemed a programmer error
     init(fixture: Fixture, bundle: Bundle = .testBundle) {
 
         guard let url = bundle.url(forResource: fixture.rawValue, withExtension: "json") else {
@@ -37,12 +42,14 @@ extension URL {
 extension Data {
 
     /// Load data for a given `Fixture`
-    /// - Parameter fixture: The `Fixture` which represents the testing data to be returned
+    /// - Parameters:
+    ///   - fixture: The `Fixture` which represents the testing data to be returned
+    ///   - bundle: The `Bundle` where the fixture data is located (`.testBundle` by default)
     /// - Returns: The `Data` for the given `Fixture`
     /// - Note: This a synchronous blocking function which reads from the disk.
-    static func load(fixture: Fixture) -> Data {
+    static func load(fixture: Fixture, bundle: Bundle = .testBundle) -> Data {
 
-        let url = URL(fixture: fixture)
+        let url = URL(fixture: fixture, bundle: bundle)
 
         do {
             return try Data(contentsOf: url)
@@ -60,4 +67,10 @@ extension Foundation.Bundle {
 
     /// Convenience accessor for the test bundle.
     static let testBundle: Bundle = Bundle(for: BundleFinder.self)
+}
+
+// MARK: - Mock Error
+
+enum MockError: Error {
+    case error
 }

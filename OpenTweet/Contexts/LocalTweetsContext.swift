@@ -52,7 +52,7 @@ extension LocalTweetsContext {
         let bundle = Bundle.main
 
         guard let url = bundle.url(forResource: "timeline", withExtension: "json") else {
-            // We trigger a fatal error here as this is a developer issue the app cannot recover from.
+            // We trigger a fatal error here as this is a developer issue the app cannot recover from (if this was loaded from the network then we would handle errors gracefully etc., but since this is from a file we control then we should ensure that the file is present and correct).
             fatalError("Unable to find local `timeline.json` resource. Please check that the resource is included in the main bundle.")
         }
 

@@ -63,3 +63,17 @@ extension Tweet: Decodable {
         )
     }
 }
+
+// MARK: - Hashable Conformance
+
+extension Tweet: Hashable {
+
+    static func == (lhs: Tweet, rhs: Tweet) -> Bool {
+        // We only really care about the ID for now, we can expand on this later if nessesary
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

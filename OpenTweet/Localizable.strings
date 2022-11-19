@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  OpenTweet
+
+  Created by Dale Buckley on 18/11/2022.
+  Copyright © 2022 OpenTable, Inc. All rights reserved.
+*/
+
+"timeline.title" = "OpenTweet";
