@@ -13,10 +13,11 @@ import Foundation
 /// A `Fixture` represents a piece of data which can be read from disk and used for testing a particular scenario
 enum Fixture: String {
 
-    case empty = "Empty"
-    case timelineDTO = "TimelineDTOFixture"
-    case tweet = "TweetFixture"
-    case tweetReplyingToTweet = "TweetReplyingToTweetFixture"
+    case empty = "Empty.json"
+    case timelineDTO = "TimelineDTOFixture.json"
+    case tweet = "TweetFixture.json"
+    case tweetReplyingToTweet = "TweetReplyingToTweetFixture.json"
+    case mockImageFixture = "MockImageFixture.jpg"
 }
 
 // MARK: - Fixture related URL extension
@@ -30,7 +31,11 @@ extension URL {
     ///   - Note: This method is only intended for testing so will throw an error if the ``Fixture`` cannot be found as this is deemed a programmer error
     init(fixture: Fixture, bundle: Bundle = .testBundle) {
 
-        guard let url = bundle.url(forResource: fixture.rawValue, withExtension: "json") else {
+        let fixtureComponents = fixture.rawValue.split(separator: ".").map(String.init)
+
+        assert(fixtureComponents.count == 2, "Expected 2 components, file name & file extension but got \(fixtureComponents.count): \(fixture.rawValue)")
+
+        guard let url = bundle.url(forResource: fixtureComponents.first!, withExtension: fixtureComponents.last!) else {
             fatalError("Unable to find resource '\(fixture.rawValue)'. Please check that the resource is included in the testing bundle.")
         }
 

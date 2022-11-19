@@ -20,6 +20,7 @@ final class TimelineViewControllerTests: XCTestCase {
     // MARK: Lifecycle
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         context = MockContext()
         viewModel = TimelineViewModel(context: context)
         controller = TimelineViewController(viewModel: viewModel)
@@ -29,6 +30,7 @@ final class TimelineViewControllerTests: XCTestCase {
         context = nil
         viewModel = nil
         controller = nil
+        try super.tearDownWithError()
     }
 
     // MARK: Tests

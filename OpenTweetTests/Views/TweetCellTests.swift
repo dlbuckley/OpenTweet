@@ -18,6 +18,9 @@ final class TweetCellTests: XCTestCase {
     // MARK: Lifecycle
 
     override func setUpWithError() throws {
+
+        try super.setUpWithError()
+
         cell = TweetCell(style: .default, reuseIdentifier: TweetCell.Identifier)
         cell.configure(
             with: mockTweet,
@@ -32,6 +35,7 @@ final class TweetCellTests: XCTestCase {
 
     override func tearDownWithError() throws {
         cell = nil
+        try super.tearDownWithError()
     }
 
     // MARK: Tests

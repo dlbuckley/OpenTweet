@@ -13,6 +13,10 @@
 		009C4C761D9F0CD600F0BC6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 009C4C741D9F0CD600F0BC6C /* LaunchScreen.storyboard */; };
 		009C4C8C1D9F0CD600F0BC6C /* OpenTweetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009C4C8B1D9F0CD600F0BC6C /* OpenTweetUITests.swift */; };
 		009C4C9B1D9F0D4100F0BC6C /* timeline.json in Resources */ = {isa = PBXBuildFile; fileRef = 009C4C9A1D9F0D4100F0BC6C /* timeline.json */; };
+		2D0346A42929841A00277A73 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0346A32929841A00277A73 /* ImageDownloader.swift */; };
+		2D0346A729298FEB00277A73 /* URLSession+AsyncBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0346A629298FEB00277A73 /* URLSession+AsyncBridge.swift */; };
+		2D0346AB2929958000277A73 /* ImageDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0346AA2929958000277A73 /* ImageDownloaderTests.swift */; };
+		2D0346AF29299BD700277A73 /* MockImageFixture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2D0346AE29299BD600277A73 /* MockImageFixture.jpg */; };
 		2DA4FADB2922999D00EA77B3 /* TimelineDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA4FADA2922999D00EA77B3 /* TimelineDTO.swift */; };
 		2DA4FADD29229B5900EA77B3 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA4FADC29229B5900EA77B3 /* Tweet.swift */; };
 		2DA4FADF2922A6D700EA77B3 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA4FADE2922A6D700EA77B3 /* Author.swift */; };
@@ -68,6 +72,10 @@
 		009C4C8D1D9F0CD600F0BC6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		009C4C9A1D9F0D4100F0BC6C /* timeline.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timeline.json; sourceTree = "<group>"; };
 		009C4C9D1D9F104800F0BC6C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2D0346A32929841A00277A73 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		2D0346A629298FEB00277A73 /* URLSession+AsyncBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+AsyncBridge.swift"; sourceTree = "<group>"; };
+		2D0346AA2929958000277A73 /* ImageDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloaderTests.swift; sourceTree = "<group>"; };
+		2D0346AE29299BD600277A73 /* MockImageFixture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MockImageFixture.jpg; sourceTree = "<group>"; };
 		2DA4FADA2922999D00EA77B3 /* TimelineDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDTO.swift; sourceTree = "<group>"; };
 		2DA4FADC29229B5900EA77B3 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		2DA4FADE2922A6D700EA77B3 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -144,8 +152,10 @@
 			children = (
 				009C4C6B1D9F0CD600F0BC6C /* AppDelegate.swift */,
 				2DA4FB062923006200EA77B3 /* SceneDelegate.swift */,
+				2D0346A529298FC200277A73 /* Extensions */,
 				2DA4FAF32922D9CA00EA77B3 /* Contexts */,
 				2DA4FAD92922997D00EA77B3 /* Models */,
+				2D0346A82929953200277A73 /* Network */,
 				2DA4FAF22922D9AB00EA77B3 /* ViewControllers */,
 				2DA4FB032922F5B800EA77B3 /* ViewModels */,
 				2DA4FB002922F00E00EA77B3 /* Views */,
@@ -162,6 +172,7 @@
 			children = (
 				2DA4FAF82922E13700EA77B3 /* Contexts */,
 				2DA4FAE02922AF4000EA77B3 /* Models */,
+				2D0346A92929954500277A73 /* Network */,
 				2DA4FB082927EAA600EA77B3 /* ViewControllers */,
 				2DA4FB1129296E0300EA77B3 /* ViewModels */,
 				2DA4FB142929768E00EA77B3 /* Views */,
@@ -187,6 +198,30 @@
 				009C4C9A1D9F0D4100F0BC6C /* timeline.json */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		2D0346A529298FC200277A73 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2D0346A629298FEB00277A73 /* URLSession+AsyncBridge.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2D0346A82929953200277A73 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2D0346A32929841A00277A73 /* ImageDownloader.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2D0346A92929954500277A73 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2D0346AA2929958000277A73 /* ImageDownloaderTests.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		2DA4FAD92922997D00EA77B3 /* Models */ = {
@@ -231,6 +266,7 @@
 				2DA4FAEE2922B76200EA77B3 /* TweetFixture.json */,
 				2DA4FAF02922B83400EA77B3 /* TweetReplyingToTweetFixture.json */,
 				2DA4FAFE2922E82100EA77B3 /* Empty.json */,
+				2D0346AE29299BD600277A73 /* MockImageFixture.jpg */,
 				2DA4FAEA2922B13100EA77B3 /* Fixtures.swift */,
 			);
 			path = Fixtures;
@@ -435,6 +471,7 @@
 				2DA4FAFF2922E82100EA77B3 /* Empty.json in Resources */,
 				2DA4FAE92922B0D800EA77B3 /* TimelineDTOFixture.json in Resources */,
 				2DA4FAEF2922B76200EA77B3 /* TweetFixture.json in Resources */,
+				2D0346AF29299BD700277A73 /* MockImageFixture.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,8 +493,10 @@
 				2DA4FAF52922DA0300EA77B3 /* ReadContext.swift in Sources */,
 				009C4C6E1D9F0CD600F0BC6C /* TimelineViewController.swift in Sources */,
 				2DA4FB022922F02500EA77B3 /* TweetCell.swift in Sources */,
+				2D0346A729298FEB00277A73 /* URLSession+AsyncBridge.swift in Sources */,
 				009C4C6C1D9F0CD600F0BC6C /* AppDelegate.swift in Sources */,
 				2DA4FB072923006200EA77B3 /* SceneDelegate.swift in Sources */,
+				2D0346A42929841A00277A73 /* ImageDownloader.swift in Sources */,
 				2DA4FAF72922DA8F00EA77B3 /* LocalTweetsContext.swift in Sources */,
 				2DA4FADD29229B5900EA77B3 /* Tweet.swift in Sources */,
 				2DA4FB052922F5CD00EA77B3 /* TimelineViewModel.swift in Sources */,
@@ -477,6 +516,7 @@
 				2DA4FAEB2922B13100EA77B3 /* Fixtures.swift in Sources */,
 				2DA4FB1329296E4200EA77B3 /* TimelineViewModelTests.swift in Sources */,
 				2DA4FB0E2927F39900EA77B3 /* UIView+Additions.swift in Sources */,
+				2D0346AB2929958000277A73 /* ImageDownloaderTests.swift in Sources */,
 				2DA4FAED2922B72C00EA77B3 /* TweetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

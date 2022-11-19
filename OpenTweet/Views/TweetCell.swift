@@ -10,6 +10,10 @@ import UIKit
 
 final class TweetCell: UITableViewCell {
 
+    // MARK: Properties
+
+    var imageDownloadTaskHandle: Task<Void, Error>?
+
     // MARK: Subviews
 
     let containerStackView: UIStackView = {
@@ -25,9 +29,11 @@ final class TweetCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.accessibilityIdentifier = "author_avatar_image_view"
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
         imageView.layer.cornerCurve = .continuous
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .lightGray
+        imageView.clipsToBounds = true
         return imageView
     }()
 
@@ -94,6 +100,10 @@ final class TweetCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
 }
 
 extension TweetCell {
@@ -106,5 +116,14 @@ extension TweetCell {
         authorLabel.text = tweet.author.id
         contentLabel.text = tweet.content
         createdAtLabel.text = dateFormatter.string(from: tweet.creationDate)
+
+        if let avatarImageURL = tweet.author.avatarURL {
+            imageDownloadTaskHandle = Task {
+                authorAvatarImageView.image = try await ImageDownloader.shared.image(from: avatarImageURL)
+            }
+        } else {
+            authorAvatarImageView.image = nil
+            imageDownloadTaskHandle = nil
+        }
     }
 }
