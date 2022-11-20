@@ -40,6 +40,7 @@ final class TimelineViewController: UIViewController {
         let tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.accessibilityIdentifier = "table_view"
+        tableView.delegate = self
         tableView.register(TweetCell.self, forCellReuseIdentifier: TweetCell.Identifier)
         return tableView
     }()
@@ -92,9 +93,21 @@ final class TimelineViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
+
+extension TimelineViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - UITableViewDiffableDataSource Helpers
+
 extension TimelineViewController {
 
-    enum TimelineSection: Hashable {
+    /// Defines the different sections of the tableview
+    private enum TimelineSection: Hashable {
         case main
     }
 }
