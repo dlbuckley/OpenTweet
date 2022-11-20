@@ -111,10 +111,14 @@ extension TweetCell {
     /// Use for the `TableView` reuse identifier
     static let Identifier = "\(TweetCell.self)"
 
+    /// Configure the cell with the given ``Tweet``.
+    /// - Parameters:
+    ///   - tweet: The ``Tweet`` to display
+    ///   - dateFormatter: A `DateFormatter` which is used to format the the displayed ``Tweet/creationDate``
     func configure(with tweet: Tweet, dateFormatter: DateFormatter) {
 
         authorLabel.text = tweet.author.id
-        contentLabel.text = tweet.content
+        contentLabel.attributedText = attributedContent(tweet.content)
         createdAtLabel.text = dateFormatter.string(from: tweet.creationDate)
 
         if let avatarImageURL = tweet.author.avatarURL {
@@ -125,5 +129,27 @@ extension TweetCell {
             authorAvatarImageView.image = nil
             imageDownloadTaskHandle = nil
         }
+    }
+
+    /// Add attributes to the content or user mentions and hyperlinks
+    /// - Parameter content: The content on which to match and apply attributes
+    /// - Returns: An `NSAttributedString` containing the attributed content.
+    private func attributedContent(_ content: String) -> NSAttributedString {
+
+        let attributedString = NSMutableAttributedString(string: content)
+
+        // User Mentions
+        let userMentions = content.userMentionRanges()
+
+        attributedString.addAttribute(.foregroundColor, value: UIColor.blue, ranges: userMentions.map { $0.0 })
+
+        // Hyperlinks
+        let links = content.urlRanges()
+
+        for (range, url) in links {
+            attributedString.addAttribute(.link, value: url, range: range)
+        }
+
+        return attributedString
     }
 }

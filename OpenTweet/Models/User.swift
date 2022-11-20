@@ -1,5 +1,5 @@
 //
-//  Author.swift
+//  User.swift
 //  OpenTweet
 //
 //  Created by Dale Buckley on 14/11/2022.

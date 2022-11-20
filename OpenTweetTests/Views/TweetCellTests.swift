@@ -47,6 +47,26 @@ final class TweetCellTests: XCTestCase {
         XCTAssertEqual(cell.createdAtLabel.text, "Dec 31, 1")
     }
 
+    func testConfigureUserMentioning() {
+
+        cell.configure(
+            with: mockUserMentioningTweet,
+            dateFormatter: {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .medium
+                return dateFormatter
+            }()
+        )
+
+        XCTAssertEqual(cell.authorLabel.text, "@Lion-O")
+        XCTAssertEqual(cell.contentLabel.text, "Thunder, thunder, @ThunderCats Ho!")
+        var attributeRange = NSRange(location: 18, length: 12)
+        XCTAssertNil(cell.contentLabel.attributedText?.attribute(.foregroundColor, at: attributeRange.lowerBound - 1, effectiveRange: nil) as? UIColor)
+        XCTAssertEqual(cell.contentLabel.attributedText?.attribute(.foregroundColor, at: 18, effectiveRange: &attributeRange) as? UIColor, UIColor.blue)
+        XCTAssertNil(cell.contentLabel.attributedText?.attribute(.foregroundColor, at: attributeRange.upperBound + 1, effectiveRange: nil) as? UIColor)
+        XCTAssertEqual(cell.createdAtLabel.text, "Dec 31, 1")
+    }
+
     func testAuthorAboveContent() throws {
 
         XCTAssertLessThan(cell.authorLabel.frame.maxY, cell.contentLabel.frame.minY)
@@ -71,6 +91,19 @@ extension TweetCellTests {
                 avatarURL: nil
             ),
             content: "My spidey senses is tingling!",
+            inReplyTo: nil
+        )
+    }
+
+    var mockUserMentioningTweet: Tweet {
+        Tweet(
+            id: "001",
+            creationDate: Date.distantPast,
+            author: User(
+                id: "@Lion-O",
+                avatarURL: nil
+            ),
+            content: "Thunder, thunder, @ThunderCats Ho!",
             inReplyTo: nil
         )
     }
